@@ -9,10 +9,12 @@ var min = Infinity
 let gridHArr = []
 const util = require('util');
 
+let coords = []
 for (let i = 0; i < m; i++) {
     grid[i] = []
     for (let j = 0; j < n; j++) {
-        grid[i][j] = { top: true, right: true, bottom: true, left: true, num: (i * n) + j }
+        coords.push([i, j])
+        grid[i][j] = { top: true, right: true, bottom: true, left: true, num: (i * n) + j, v: false }
         if (j == 0) {
             grid[i][j].left = false
         } else if (j == n - 1) {
@@ -41,7 +43,7 @@ while (true) {
     // })
     let plausibleChoices = openWalls(cellCopy)
 
-    if (plausibleChoices.length >= 3) {
+    if ((plausibleChoices.length >= 2 || (currentJ == 0 && currentI == 0 && plausibleChoices.length != 0)) && cellCopy.v == false) {
         let wallChoice = plausibleChoices[Math.floor(Math.random() * plausibleChoices.length)]
         cellCopy[wallChoice] = false
         let wallAdjCell = { complete: null, direction: null }
@@ -77,12 +79,18 @@ while (true) {
         grid = changeValueFromValue(bigNum, smallNum, grid)
         // minValue(currentI, currentJ, "asldf")
         gridHArr.push(grid)
-        console.log(grid)
+        // console.log(grid)
+
+        cellCopy.v = true
+
         if (isDone(grid)) {
             // let dataString = util.inspect(gridHArr, { depth: null });
             // console.log(dataString)
+            let output = util.inspect(grid, { breakLength: 100 });
+            console.log(output);
             break
         }
+
     }
     //Make it choose a cell from a list where there are only tiles where there 
 }
@@ -110,7 +118,7 @@ function minValue(i, j, cameFromWall) {
     let openWallsArr = openWalls(grid[i][j])
     // console.log(cameFromWall)
     // console.log(openWallsArr ? openWallsArr : "")
-    if (grid[i][j].visited == true) {
+    if (grid[i][j] == true) {
         return
     }
     openWallsArr = openWallsArr.filter(val => {
@@ -141,15 +149,16 @@ function openWalls(cell) {
     return plausibleChoices
 }
 function isDone(grid) {
-    // let flatGrid = grid.flatMap((row) => row.map((obj) => obj));
-    // return flatGrid.every(tile => tile.num == 0)
-    if (grid[Math.floor(m / 2) - 1][Math.floor(n / 2) - 1].num == 0) {
-        return true
-    } else {
-        false
-    }
+    let flatGrid = grid.flatMap((row) => row.map((obj) => obj));
+    return flatGrid.every(tile => tile.v == true)
+    // if (grid[Math.floor(m / 2) - 1][Math.floor(n / 2) - 1].num == 0) {
+    //     return true
+    // } else {
+    //     false
+    // }
 }
 
 //*OPTIMIZATIONS:
 //*-Recursion instead of brute force
-//*-Create another array of the tiles which meet the criteria instead of being able to choose ones that do not comply with the criteria 
+//*-Create another array of the tiles which meet the criteria instead of being able to choose ones that do not comply with the criteria
+//Finally figured out why tf it was not working, you can only choose a cell once. It will be solvable due to 
