@@ -2,6 +2,7 @@ let grid = []
 let m = 5
 let n = 5
 const dirArray = ["top", "right", "bottom", "left"]
+const oppositeDir = { "top": "bottom", "bottom": "top", "left": "right", "right": "left" }
 //I is for rows
 //J is for columns
 var min = Infinity
@@ -97,19 +98,22 @@ function changeValueFromValue(searchValue, instertValue, grid) {
 function minValue(i, j, cameFromWall) {
     min = Math.min(grid[i][j].num, min)
     let openWallsArr = openWalls(grid[i][j])
+    // console.log(cameFromWall)
+    // console.log(openWallsArr ? openWallsArr : "")
     openWallsArr = openWallsArr.filter(val => {
         return val != cameFromWall
     })
-    if (openWalls.length > 0) {
+    // console.log(openWallsArr ? openWallsArr : "")
+    if (openWallsArr.length > 0) {
         openWalls(grid[i][j]).forEach((wall) => {
             if (wall == "top") {
-                minValue(i - 1, j)
+                minValue(i - 1, j, oppositeDir[wall])
             } else if (wall == "right") {
-                minValue(i, j + 1)
+                minValue(i, j + 1, oppositeDir[wall])
             } else if (wall == "bottom") {
-                minValue(i + 1, j)
+                minValue(i + 1, j, oppositeDir[wall])
             } else if (wall == "left") {
-                minValue(i, j - 1)
+                minValue(i, j - 1, oppositeDir[wall])
             }
         })
     }
