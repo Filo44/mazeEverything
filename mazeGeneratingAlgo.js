@@ -1,11 +1,13 @@
 let grid = []
-let m = 5
-let n = 5
+let m = 20
+let n = 20
 const dirArray = ["top", "right", "bottom", "left"]
 const oppositeDir = { "top": "bottom", "bottom": "top", "left": "right", "right": "left" }
 //I is for rows
 //J is for columns
 var min = Infinity
+let gridHArr = []
+const util = require('util');
 
 for (let i = 0; i < m; i++) {
     grid[i] = []
@@ -39,40 +41,48 @@ while (true) {
     // })
     let plausibleChoices = openWalls(cellCopy)
 
-    if (plausibleChoices.length != 0) {
+    if (plausibleChoices.length >= 3) {
         let wallChoice = plausibleChoices[Math.floor(Math.random() * plausibleChoices.length)]
         cellCopy[wallChoice] = false
         let wallAdjCell = { complete: null, direction: null }
-        console.log(plausibleChoices)
-        console.log(wallChoice)
-        console.log(grid)
+        // console.log(cellCopy.num)
+        // console.log(plausibleChoices)
+        // console.log(wallChoice)
         if (wallChoice == "top") {
             wallAdjCell.complete = grid[currentI - 1][currentJ]
             wallAdjCell.direction = "bottom"
-            console.log(wallChoice)
+            //console.log(wallChoice)
         } else if (wallChoice == "right") {
             wallAdjCell.complete = grid[currentI][currentJ + 1]
             wallAdjCell.direction = "left"
-            console.log(wallChoice)
+            //console.log(wallChoice)
         } else if (wallChoice == "bottom") {
             wallAdjCell.complete = grid[currentI + 1][currentJ]
             wallAdjCell.direction = "top"
-            console.log(wallChoice)
+            //console.log(wallChoice)
         } else if (wallChoice == "left") {
             wallAdjCell.complete = grid[currentI][currentJ - 1]
             wallAdjCell.direction = "right"
-            console.log(wallChoice)
+            //console.log(wallChoice)
         }
-        console.log(wallAdjCell)
+        //console.log(wallAdjCell)
         let smallNum = Math.min(cellCopy.num, wallAdjCell.complete.num)
         let bigNum = Math.max(cellCopy.num, wallAdjCell.complete.num)
         //*Could do recursion instead of just brute force for optimization
-
-        cellCopy.num = smallNum
-        wallAdjCell.complete.num = smallNum
+        //*Attempting to do so
+        // cellCopy.num = smallNum
+        // wallAdjCell.complete.num = smallNum
         wallAdjCell.complete[wallAdjCell.direction] = false
-        // grid = changeValueFromValue(bigNum, smallNum, grid)
-        minValue(currentI, currentJ, "asldf")
+
+        grid = changeValueFromValue(bigNum, smallNum, grid)
+        // minValue(currentI, currentJ, "asldf")
+        gridHArr.push(grid)
+        console.log(grid)
+        if (isDone(grid)) {
+            // let dataString = util.inspect(gridHArr, { depth: null });
+            // console.log(dataString)
+            break
+        }
     }
     //Make it choose a cell from a list where there are only tiles where there 
 }
@@ -89,7 +99,7 @@ function changeValueFromValue(searchValue, instertValue, grid) {
             }
         }
     }
-    console.log(res)
+    // console.log(res)
     return res
 }
 // function recursiveValueChange(i, j, wall) {
@@ -100,12 +110,15 @@ function minValue(i, j, cameFromWall) {
     let openWallsArr = openWalls(grid[i][j])
     // console.log(cameFromWall)
     // console.log(openWallsArr ? openWallsArr : "")
+    if (grid[i][j].visited == true) {
+        return
+    }
     openWallsArr = openWallsArr.filter(val => {
         return val != cameFromWall
     })
     // console.log(openWallsArr ? openWallsArr : "")
     if (openWallsArr.length > 0) {
-        openWalls(grid[i][j]).forEach((wall) => {
+        openWallsArr.forEach((wall) => {
             if (wall == "top") {
                 minValue(i - 1, j, oppositeDir[wall])
             } else if (wall == "right") {
@@ -127,3 +140,16 @@ function openWalls(cell) {
     })
     return plausibleChoices
 }
+function isDone(grid) {
+    // let flatGrid = grid.flatMap((row) => row.map((obj) => obj));
+    // return flatGrid.every(tile => tile.num == 0)
+    if (grid[Math.floor(m / 2) - 1][Math.floor(n / 2) - 1].num == 0) {
+        return true
+    } else {
+        false
+    }
+}
+
+//*OPTIMIZATIONS:
+//*-Recursion instead of brute force
+//*-Create another array of the tiles which meet the criteria instead of being able to choose ones that do not comply with the criteria 
