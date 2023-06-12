@@ -1,0 +1,29 @@
+.grid{
+  display:grid;
+  grid-template-columns: repeat(20, 1fr);
+  width:250px;
+}
+.tile{
+  height:50px;
+  width:50px;
+  text-align: center;
+  /* border:black 1px solid; */
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.left{
+  border-left:black 1px solid;
+}
+.right{
+  border-right:black 1px solid;
+}
+.bottom{
+  border-bottom:black 1px solid;
+}
+.top{
+  border-top:black 1px solid;
+}
+.center{
+  background-color: rgb(248, 247, 162);
+}
