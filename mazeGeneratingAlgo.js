@@ -28,70 +28,56 @@ for (let i = 0; i < m; i++) {
         //Fix for edge pls
     }
 }
+let phase = 0
 while (true) {
-    // console.log(coords)
-    let counter = 0
-    coords.forEach(([currentI, currentJ]) => {
+    if (phase == 0) {
+        // console.log(coords)
 
-        grid[currentI][currentJ].v = true
-        let cellCopy = grid[currentI][currentJ]
-
-        let plausibleChoices = openWalls(cellCopy)
-
-        // if (plausibleChoices.length >= 2 || (currentJ == 0 && currentI == 0 && plausibleChoices.length != 0)) {
-        if (plausibleChoices.length != 0) {
+        let counter = 0
+        coords.forEach(([currentI, currentJ]) => {
+            let cellCopy = grid[currentI][currentJ]
+            let plausibleChoices = openWalls(cellCopy)
             let wallChoice = plausibleChoices[Math.floor(Math.random() * plausibleChoices.length)]
-            cellCopy[wallChoice] = false
-            let wallAdjCell = { complete: null, direction: null }
-            // console.log(cellCopy.num)
-            // console.log(plausibleChoices)
-            // console.log(wallChoice)
-
-            if (wallChoice == "top") {
-                wallAdjCell.complete = grid[currentI - 1][currentJ]
-                wallAdjCell.direction = "bottom"
-            } else if (wallChoice == "right") {
-                wallAdjCell.complete = grid[currentI][currentJ + 1]
-                wallAdjCell.direction = "left"
-            } else if (wallChoice == "bottom") {
-                wallAdjCell.complete = grid[currentI + 1][currentJ]
-                wallAdjCell.direction = "top"
-            } else if (wallChoice == "left") {
-                wallAdjCell.complete = grid[currentI][currentJ - 1]
-                wallAdjCell.direction = "right"
-            } else {
-                console.log(wallChoice)
-                console.log("WTF")
-            }
-            let smallNum = Math.min(cellCopy.num, wallAdjCell.complete.num)
-            let bigNum = Math.max(cellCopy.num, wallAdjCell.complete.num)
-            //*Could do recursion instead of just brute force for optimization
-            //*Attempting to do so
-
-            wallAdjCell.complete[wallAdjCell.direction] = false
-
-            grid = changeValueFromValue(bigNum, smallNum, grid)
-            // minValue(currentI, currentJ, "asldf")
-            gridHArr.push(grid)
-            // console.log(counter)
-
-
-            // if (isDone(grid)) {
-            //     // let dataString = util.inspect(gridHArr, { depth: null });
-            //     // console.log(dataString)
-            //     let output = util.inspect(grid, { breakLength: 100 });
-            //     console.log(output);
-            // }
+            grid = wallRemovalShenanigans(grid, currentI, currentJ, wallChoice, plausibleChoices)
             counter++
-        }
-    })
-    let output = util.inspect(grid, { breakLength: 100 });
-    if (nonZeroCoords(grid).length == 0) {
-        console.log(output);
-        break
+        })
+        let output = util.inspect(grid, { breakLength: 100 });
+        console.log(output)
+        phase++
     } else {
-        coords = nonZeroCoords(grid)
+        if (nonZeroCoords(grid).length == 0) {
+            console.log(output);
+            break
+        } else {
+            let nonZeroCoordsA = nonZeroCoords(grid)
+            let best = Infinity;
+            let bestCoordsI = 0
+            let bestCoordsJ = 0
+            let bestWall = ""
+            let currentNonZeroAmount = howMany(0, grid)
+            nonZeroCoordsA.forEach(([currentI, currentJ]) => {
+                let cellCopy = grid[currentI][currentJ]
+                let plausibleChoices = openWalls(cellCopy)
+                plausibleChoices.forEach((wallchoice) => {
+                    let tempGrid = wallRemovalShenanigans(grid, currentI, currentJ, wallchoice, ["I probably should've chosen a better algo"])
+                    let am = howMany(0, tempGrid)
+                    if (currentNonZeroAmount - am < best) {
+                        best = currentNonZeroAmount - am
+                        bestCoordsI = currentI
+                        bestCoordsJ = currentJ
+                        bestWall = wallchoice
+                        console.log(`bestNum: ${best} bestI: ${bestCoordsI} bestJ: ${bestCoordsJ} bestWall: ${bestWall}`)
+                    }
+                })
+            })
+            let output = util.inspect(wallRemovalShenanigans(grid, bestCoordsI, bestCoordsJ, bestWall, ["I probably should've chosen a better algo"]), { breakLength: 100 });
+            console.log(output)
+            console.log("done 1,for debugging")
+        }
+        phase++
     }
+
+
 }
 
 function changeValueFromValue(searchValue, instertValue, grid) {
@@ -156,6 +142,16 @@ function isDone(grid) {
     //     false
     // }
 }
+function howMany(num, grid) {
+    let flatGrid = grid.flatMap((row) => row.map((obj) => obj));
+    let i = 0
+    flatGrid.forEach(tile => {
+        if (tile.num == num) {
+            i++
+        }
+    })
+    return i
+}
 function nonZeroCoords(grid) {
     // let flatGrid = grid.flatMap((row) => row.map((obj) => obj));
     let i = 0;
@@ -169,6 +165,59 @@ function nonZeroCoords(grid) {
         }
     }
     return res
+}
+function wallRemovalShenanigans(gridLoc, currentI, currentJ, wallChoice, plausibleChoices) {
+
+    gridLoc[currentI][currentJ].v = true
+    let cellCopy = gridLoc[currentI][currentJ]
+
+    // if (plausibleChoices.length >= 2 || (currentJ == 0 && currentI == 0 && plausibleChoices.length != 0)) {
+    if (plausibleChoices.length != 0) {
+
+        cellCopy[wallChoice] = false
+        let wallAdjCell = { complete: null, direction: null }
+        // console.log(cellCopy.num)
+        // console.log(plausibleChoices)
+        // console.log(wallChoice)
+
+        if (wallChoice == "top") {
+            wallAdjCell.complete = grid[currentI - 1][currentJ]
+            wallAdjCell.direction = "bottom"
+        } else if (wallChoice == "right") {
+            wallAdjCell.complete = grid[currentI][currentJ + 1]
+            wallAdjCell.direction = "left"
+        } else if (wallChoice == "bottom") {
+            wallAdjCell.complete = grid[currentI + 1][currentJ]
+            wallAdjCell.direction = "top"
+        } else if (wallChoice == "left") {
+            wallAdjCell.complete = grid[currentI][currentJ - 1]
+            wallAdjCell.direction = "right"
+        } else {
+            console.log(wallChoice)
+            console.log("WTH")
+        }
+        let smallNum = Math.min(cellCopy.num, wallAdjCell.complete.num)
+        let bigNum = Math.max(cellCopy.num, wallAdjCell.complete.num)
+        //*Could do recursion instead of just brute force for optimization
+        //*Attempting to do so
+
+        wallAdjCell.complete[wallAdjCell.direction] = false
+
+        gridLoc = changeValueFromValue(bigNum, smallNum, grid)
+        // minValue(currentI, currentJ, "asldf")
+        gridHArr.push(gridLoc)
+        // console.log(counter)
+
+
+        // if (isDone(grid)) {
+        //     // let dataString = util.inspect(gridHArr, { depth: null });
+        //     // console.log(dataString)
+        //     let output = util.inspect(grid, { breakLength: 100 });
+        //     console.log(output);
+        // }
+
+    }
+    return gridLoc
 }
 
 //*OPTIMIZATIONS:
