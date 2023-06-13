@@ -75,7 +75,7 @@ while (true) {
             })
             let something = wallRemovalShenanigans(grid, bestCoordsI, bestCoordsJ, bestWall, ["I probably should've chosen a better algo"])
             let output = util.inspect(something, { breakLength: 100 });
-            console.log(output)
+            // console.log(output)
             console.log("done 1,for debugging")
             break
         }
@@ -174,7 +174,7 @@ function wallRemovalShenanigans(grid, currentI, currentJ, wallChoice) {
     // console.log(currentI)
     // console.log(currentJ)
     // console.log(wallChoice)
-    gridLoc = structuredClone(grid)
+    gridLoc = grid
     gridLoc[currentI][currentJ].v = true
     let cellCopy = gridLoc[currentI][currentJ]
 
