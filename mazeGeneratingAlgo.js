@@ -1,3 +1,4 @@
+const util = require('util');
 let grid = []
 let m = 20
 let n = 20
@@ -7,7 +8,9 @@ const oppositeDir = { "top": "bottom", "bottom": "top", "left": "right", "right"
 //J is for columns
 var min = Infinity
 let gridHArr = []
-const util = require('util');
+
+
+
 
 let coords = []
 for (let i = 0; i < m; i++) {
@@ -76,9 +79,11 @@ while (true) {
             grid = wallRemovalShenanigans(grid, bestCoordsI, bestCoordsJ, bestWall, ["I probably should've chosen a better algo"])
             console.log("done 1,for debugging")
             if (isDone(grid)) {
-                let output = util.inspect(grid, { breakLength: 100 });
+                let something = fix(grid)
+                let output = util.inspect(something, { breakLength: 100 });
                 console.log(output)
                 break
+
             }
         }
     }
@@ -176,7 +181,7 @@ function wallRemovalShenanigans(grid, currentI, currentJ, wallChoice) {
     // console.log(currentI)
     // console.log(currentJ)
     // console.log(wallChoice)
-    gridLoc = grid
+    let gridLoc = grid
     gridLoc[currentI][currentJ].v = true
     let cellCopy = gridLoc[currentI][currentJ]
 
@@ -221,7 +226,7 @@ function noChangeWallIHateJs(grid, currentI, currentJ, wallChoice) {
     // console.log(currentI)
     // console.log(currentJ)
     // console.log(wallChoice)
-    gridLoc = structuredClone(grid)
+    let gridLoc = structuredClone(grid)
     gridLoc[currentI][currentJ].v = true
     let cellCopy = gridLoc[currentI][currentJ]
 
@@ -260,6 +265,24 @@ function noChangeWallIHateJs(grid, currentI, currentJ, wallChoice) {
     gridHArr.push(gridLoc)
     // console.log(counter)
     return gridLoc
+}
+function fix(grid) {
+    let resGrid = structuredClone(grid)
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid[i].length; j++) {
+            if (i != 0) {
+                grid[i][j].top = grid[i][j].top || grid[i - 1][j].bottom
+            } if (i != grid.length - 1) {
+                grid[i][j].bottom = grid[i][j].bottom || grid[i + 1][j].top
+            } if (j != grid[i].length - 1) {
+                // console.log(`i:${i}, j:${j}`)
+                grid[i][j].right = grid[i][j].right || grid[i][j + 1].left
+            } if (j != 0) {
+                grid[i][j].left = grid[i][j].left || grid[i][j - 1].right
+            }
+        }
+    }
+    return resGrid
 }
 
 //*OPTIMIZATIONS:
