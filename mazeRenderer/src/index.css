@@ -75,11 +75,16 @@ body{
 .button2{
   left:1230px;
 }
+.button3{
+  left:1340px;
+}
 .pointer{
   position: absolute;
   height:50px;
   width:50px;
   text-align: center;
+  font-size: 40px;
+  font-weight: bold;
   /* border:black 1px solid; */
   display:flex;
   justify-content: center;

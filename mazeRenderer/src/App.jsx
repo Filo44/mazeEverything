@@ -33,6 +33,17 @@ function App() {
         return <div>{n}</div>
     })
     let pos={left:`${51.5*(pointer[i][1]+1)+8}px`,top:`${51.9*(pointer[i][0]+1)+8}px`}
+    function something(){
+        var intervalId = setInterval(()=>setI((prevI)=>{
+            if(prevI<pointer.length-1){
+                return prevI+1
+            }else{
+                clearInterval(intervalId)
+                setI(0)
+                return prevI
+            }
+        }),10)
+    }
 
     return (
         <>  
@@ -49,10 +60,13 @@ function App() {
                 {mazeElements}
             </div>
             <button className='button' onClick={()=>setI(i+1)}>
-                Hi!
+                Step
             </button>
-            <button className='button button2' onClick={()=>setInterval(()=>setI((prevI)=>prevI+1),30)}>
-                Hi!
+            <button className='button button2' onClick={()=>something()}>
+                Play
+            </button>
+            <button className='button button3' onClick={()=>setI(0)}>
+                Reset
             </button>
         </>
         
