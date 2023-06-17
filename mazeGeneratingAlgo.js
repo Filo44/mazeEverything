@@ -79,9 +79,13 @@ while (true) {
             grid = wallRemovalShenanigans(grid, bestCoordsI, bestCoordsJ, bestWall, ["I probably should've chosen a better algo"])
             console.log("done 1,for debugging")
             if (isDone(grid)) {
-                let something = fix(grid)
-                let output = util.inspect(something, { breakLength: 100 });
+                let output = util.inspect(grid, { breakLength: 100 });
                 console.log(output)
+                console.log("alwdflkasjd;flajsd;flajsdl;fkjasd;lfkjas;dlfkjas;lkdfjal;ksdfj;asd;fjlasdjkflasjdlfkkasjdflkasjdfklasjdflkasjd;flasdjflkj")
+                console.log("alwdflkasjd;flajsd;flajsdl;fkjasd;lfkjas;dlfkjas;lkdfjal;ksdfj;asd;fjlasdjkflasjdlfkkasjdflkasjdfklasjdflkasjd;flasdjflkj")
+                console.log("alwdflkasjd;flajsd;flajsdl;fkjasd;lfkjas;dlfkjas;lkdfjal;ksdfj;asd;fjlasdjkflasjdlfkkasjdflkasjdfklasjdflkasjd;flasdjflkj")
+                console.log("alwdflkasjd;flajsd;flajsdl;fkjasd;lfkjas;dlfkjas;lkdfjal;ksdfj;asd;fjlasdjkflasjdlfkkasjdflkasjdfklasjdflkasjd;flasdjflkj")
+                fix(grid)
                 break
 
             }
@@ -268,20 +272,22 @@ function noChangeWallIHateJs(grid, currentI, currentJ, wallChoice) {
 }
 function fix(grid) {
     let resGrid = structuredClone(grid)
-    for (let i = 0; i < grid.length; i++) {
-        for (let j = 0; j < grid[i].length; j++) {
+    for (let i = 0; i < resGrid.length; i++) {
+        for (let j = 0; j < resGrid[i].length; j++) {
             if (i != 0) {
-                grid[i][j].top = grid[i][j].top || grid[i - 1][j].bottom
-            } if (i != grid.length - 1) {
-                grid[i][j].bottom = grid[i][j].bottom || grid[i + 1][j].top
-            } if (j != grid[i].length - 1) {
+                resGrid[i][j].top = resGrid[i][j].top || resGrid[i - 1][j].bottom
+            } if (i != resGrid.length - 1) {
+                resGrid[i][j].bottom = resGrid[i][j].bottom || resGrid[i + 1][j].top
+            } if (j != resGrid[i].length - 1) {
                 // console.log(`i:${i}, j:${j}`)
-                grid[i][j].right = grid[i][j].right || grid[i][j + 1].left
+                resGrid[i][j].right = resGrid[i][j].right || resGrid[i][j + 1].left
             } if (j != 0) {
-                grid[i][j].left = grid[i][j].left || grid[i][j - 1].right
+                resGrid[i][j].left = resGrid[i][j].left || resGrid[i][j - 1].right
             }
         }
     }
+    let output = util.inspect(resGrid, { breakLength: 100 });
+    console.log(output)
     return resGrid
 }
 
