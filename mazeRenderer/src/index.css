@@ -4,7 +4,8 @@ body{
 .grid{
   display:grid;
   grid-template-columns: repeat(20, 1fr);
-  width:250px;
+  width:1047px;
+  border:black 3px solid;
 }
 .tile{
   height:50px;
@@ -37,7 +38,7 @@ body{
 }
 .header *{
   height:51.4px;
-  width:51.4px;
+  width:52.5px;
   text-align: center;
   /* border:black 1px solid; */
   display:flex;
@@ -52,7 +53,7 @@ body{
   width:250px;
 }
 .headerv *{
-  height:51.4px;
+  height:52.5px;
   width:51.4px;
   text-align: center;
   /* border:black 1px solid; */
@@ -68,8 +69,11 @@ body{
   background-color: red;
   color: white;
   position: absolute;
-  left:1090px;
+  left:1120px;
   top:10px;
+}
+.button2{
+  left:1230px;
 }
 .pointer{
   position: absolute;
