@@ -42,7 +42,7 @@ function App() {
                 setI(0)
                 return prevI
             }
-        }),10)
+        }),30)
     }
 
     return (
