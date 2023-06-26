@@ -32,7 +32,7 @@ function App() {
     const hElements=hr.map((n)=>{
         return <div>{n}</div>
     })
-    let pos={left:`${51.5*(pointer[i][1]+1)+8}px`,top:`${51.9*(pointer[i][0]+1)+8}px`}
+    let pos={left:`${52.5*(pointer[i][1]+1)+8}px`,top:`${52.5*(pointer[i][0]+1)+8}px`}
     function something(){
         var intervalId = setInterval(()=>setI((prevI)=>{
             if(prevI<pointer.length-1){
