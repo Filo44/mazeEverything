@@ -3,8 +3,8 @@ import Tile from './Tile'
 // import { createServer } from "http";
 // import { Server } from "socket.io";
 
-import { grid } from "C:/Users/Filippo/Downloads/SCIENCE/grid.mjs"
-import { pointer } from "C:/Users/Filippo/Downloads/SCIENCE/pointer.mjs"
+import { grid } from "../../grid.mjs"
+import { pointer } from "../../pointer.mjs"
 
 function App() {
     let maze=grid
