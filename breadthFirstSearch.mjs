@@ -1,6 +1,6 @@
 import { grid } from "./grid.mjs"
 import util from "util"
-var visitedArray = []
+var visitedArray = [[0, 0]]
 var secondRoute = []
 let finished = false
 
@@ -8,10 +8,12 @@ function openWalls(grid, i, j) {
     // console.log(`i:${i},j:${j}`)
     let cell = grid[i][j]
     let plausibleChoices = []
+    let wallDir = []
     Object.keys(cell).forEach((key) => {
-        if (key != "num" && key != "v" && cell[key] == true) {
+        if (key != "num" && key != "v" && cell[key] == false) {
             // console.log(key)
             // console.log("--------")
+            wallDir.push(key)
             let cond1 = false
             switch (key) {
                 case "left":
@@ -42,6 +44,9 @@ function openWalls(grid, i, j) {
             // console.log("--------")
         }
     })
+    // console.log(wallDir)
+    // console.log("plausibleChoices:")
+    // console.log(plausibleChoices)
     return plausibleChoices
 }
 
@@ -57,6 +62,7 @@ function main() {
     let checkRoutes = firstCoords.map(singleCoords => {
         return [singleCoords]
     })
+    console.log("checkRoutes:", checkRoutes)
     // console.log(checkRoutes)
     //While true loop
     while (true) {
@@ -91,13 +97,15 @@ function main() {
                 return
             }
         })
-        console.log("visited:", visitedArray)
+        console.log("checkRoutes:", checkRoutes)
+        console.log("visitedArray:", visitedArray)
         console.log("iteration done")
     }
 
 }
 
 main()
+// console.log(openWalls(grid, 7, 6))
 let output = util.inspect(JSON.stringify(visitedArray), { maxStringLength: Infinity });
 console.log(output)
 
