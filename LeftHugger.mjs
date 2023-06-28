@@ -1,8 +1,8 @@
-import { grid } from "./grid.mjs"
-import util from "util"
+// import { grid } from "./grid.mjs"
+// import util from "util"
 export function LeftHuggerMain(grid, n, m) {
-    let midM = (m - 1) / 2
-    let midN = (n - 1) / 2
+    let midM = Math.floor((m - 1) / 2)
+    let midN = midM
     var visitedArray = []
     const dirData = [
         { name: "top", opposite: "bottom", addI: -1, addJ: 0 },
@@ -67,11 +67,11 @@ export function LeftHuggerMain(grid, n, m) {
         }
     }
     Hug(0, 0, null, null, grid)
-    let output = util.inspect(JSON.stringify(visitedArray), { maxStringLength: Infinity });
-    console.log(output)
-    let output2 = util.inspect(JSON.stringify(removeCoordinates(visitedArray)), { maxStringLength: Infinity });
-    console.log(output2)
+    // let output = util.inspect(JSON.stringify(visitedArray), { maxStringLength: Infinity });
+    // console.log(output)
+    // let output2 = util.inspect(JSON.stringify(removeCoordinates(visitedArray)), { maxStringLength: Infinity });
+    // console.log(output2)
     console.log(visitedArray.length, removeCoordinates(visitedArray).length)
     return [visitedArray.length, removeCoordinates(visitedArray).length]
 }
-LeftHuggerMain(grid, 25, 25)
+// LeftHuggerMain(grid, 25, 25)

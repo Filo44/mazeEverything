@@ -1,4 +1,3 @@
-
 export function mazeGeneratingMain(m, n) {
     let grid = []
     const dirArray = ["top", "right", "bottom", "left"]
@@ -71,19 +70,19 @@ export function mazeGeneratingMain(m, n) {
                             bestCoordsI = currentI
                             bestCoordsJ = currentJ
                             bestWall = wallchoice
-                            console.log(`bestNum: ${best} bestI: ${bestCoordsI} bestJ: ${bestCoordsJ} bestWall: ${bestWall}`)
+                            // console.log(`bestNum: ${best} bestI: ${bestCoordsI} bestJ: ${bestCoordsJ} bestWall: ${bestWall}`)
                         }
                     })
                 })
                 grid = wallRemovalShenanigans(grid, bestCoordsI, bestCoordsJ, bestWall, ["I probably should've chosen a better algo"])
-                console.log("done 1,for debugging")
+                // console.log("done 1,for debugging")
                 if (isDone(grid)) {
                     // let output = util.inspect(grid, { breakLength: 100 });
                     // console.log(output)
-                    console.log("alwdflkasjd;flajsd;flajsdl;fkjasd;lfkjas;dlfkjas;lkdfjal;ksdfj;asd;fjlasdjkflasjdlfkkasjdflkasjdfklasjdflkasjd;flasdjflkj")
-                    console.log("alwdflkasjd;flajsd;flajsdl;fkjasd;lfkjas;dlfkjas;lkdfjal;ksdfj;asd;fjlasdjkflasjdlfkkasjdflkasjdfklasjdflkasjd;flasdjflkj")
-                    console.log("alwdflkasjd;flajsd;flajsdl;fkjasd;lfkjas;dlfkjas;lkdfjal;ksdfj;asd;fjlasdjkflasjdlfkkasjdflkasjdfklasjdflkasjd;flasdjflkj")
-                    console.log("alwdflkasjd;flajsd;flajsdl;fkjasd;lfkjas;dlfkjas;lkdfjal;ksdfj;asd;fjlasdjkflasjdlfkkasjdflkasjdfklasjdflkasjd;flasdjflkj")
+                    // console.log("alwdflkasjd;flajsd;flajsdl;fkjasd;lfkjas;dlfkjas;lkdfjal;ksdfj;asd;fjlasdjkflasjdlfkkasjdflkasjdfklasjdflkasjd;flasdjflkj")
+                    // console.log("alwdflkasjd;flajsd;flajsdl;fkjasd;lfkjas;dlfkjas;lkdfjal;ksdfj;asd;fjlasdjkflasjdlfkkasjdflkasjdfklasjdflkasjd;flasdjflkj")
+                    // console.log("alwdflkasjd;flajsd;flajsdl;fkjasd;lfkjas;dlfkjas;lkdfjal;ksdfj;asd;fjlasdjkflasjdlfkkasjdflkasjdfklasjdflkasjd;flasdjflkj")
+                    // console.log("alwdflkasjd;flajsd;flajsdl;fkjasd;lfkjas;dlfkjas;lkdfjal;ksdfj;asd;fjlasdjkflasjdlfkkasjdflkasjdfklasjdflkasjd;flasdjflkj")
                     fix(grid)
                     break
 

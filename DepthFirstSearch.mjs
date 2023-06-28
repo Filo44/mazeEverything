@@ -1,8 +1,8 @@
-import util from "util"
-import { grid } from "./grid.mjs"
+// import util from "util"
+// import { grid } from "./grid.mjs"
 export function DFSMain(grid, n, m) {
-    let midM = (m - 1) / 2
-    let midN = (n - 1) / 2
+    let midM = Math.floor((m - 1) / 2)
+    let midN = midM
     var visitedArray = []
     var secondRoute = []
     var finished = false
@@ -53,8 +53,9 @@ export function DFSMain(grid, n, m) {
         }
     }
     DFS(0, 0, null, null, grid)
-    let output = util.inspect(JSON.stringify(secondRoute), { maxStringLength: Infinity });
-    console.log(output)
+    // let output = util.inspect(JSON.stringify(secondRoute), { maxStringLength: Infinity });
+    // console.log(output)
+    console.log(secondRoute)
     return [visitedArray.length, secondRoute.length]
 }
-console.log(DFSMain(grid, 25, 25))
+// console.log(DFSMain(grid, 25, 25))
