@@ -48,6 +48,7 @@ function DFS(i, j, fromI, fromJ, grid) {
         visitedArray.push([i, j])
     }
     currentRoute.pop()
+
 }
 DFS(0, 0, null, null, grid)
 let output = util.inspect(JSON.stringify(visitedArray), { maxStringLength: Infinity });
