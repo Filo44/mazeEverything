@@ -59,7 +59,6 @@ function BFS(i, j, fromI, fromJ, grid) {
 }
 function main() {
     grid[0][0].v = false
-    //Check open walls and append them to the check routes array for the first tile
     let firstCoords = openWalls(grid, 0, 0)
     // console.log(firstCoords)
     let checkRoutes = firstCoords.map(singleCoords => {
@@ -73,16 +72,22 @@ function main() {
         //For now just check if there is only one don't add the reverse
         // console.log("checkRoutes:", checkRoutes)
         console.log("outside")
+        let first = true
         checkRoutes.forEach((route) => {
             console.log("inside")
             //For each route append it to the visitedArray, then the reverse
             let reversedArray = route.slice()
             reversedArray.reverse()
             reversedArray.shift()
-            console.log("route:", ...route)
-            console.log("reversedArray:", ...reversedArray)
             visitedArray.push(...route)
-            visitedArray.push(...reversedArray)
+            console.log("route:", ...route)
+            if (!first) {
+                console.log("reversedArray:", ...reversedArray)
+                visitedArray.push(...reversedArray)
+            } else {
+                first = false
+            }
+
             // console.log(visitedArray)
             // console.log("visitedArray: ", visitedArray)
             //Check the walls on the last element in that route
@@ -110,6 +115,10 @@ function main() {
         console.log("visitedArray:", visitedArray)
         console.log("iteration done")
     }
+
+}
+
+function fix() {
 
 }
 
