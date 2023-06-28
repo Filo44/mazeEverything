@@ -1,6 +1,8 @@
 import { grid } from "./grid.mjs"
 import util from "util"
-function main(grid) {
+export function LeftHuggerMain(grid, n, m) {
+    let midM = (m - 1) / 2
+    let midN = (n - 1) / 2
     var visitedArray = []
     const dirData = [
         { name: "top", opposite: "bottom", addI: -1, addJ: 0 },
@@ -34,7 +36,7 @@ function main(grid) {
         visitedArray.push([i, j])
         grid[i][j].visited = true
         let tile = grid[i][j]
-        if (i == 9 && j == 9) {
+        if (i == midM && j == midN) {
             finished = true
             console.log("Length:", visitedArray.length)
             return
@@ -69,6 +71,7 @@ function main(grid) {
     console.log(output)
     let output2 = util.inspect(JSON.stringify(removeCoordinates(visitedArray)), { maxStringLength: Infinity });
     console.log(output2)
+    console.log(visitedArray.length, removeCoordinates(visitedArray).length)
     return [visitedArray.length, removeCoordinates(visitedArray).length]
 }
-main(grid)
+LeftHuggerMain(grid, 25, 25)

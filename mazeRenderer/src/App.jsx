@@ -12,7 +12,7 @@ function App() {
     // const [pointer,setPointer]=useState()
     const newMaze = maze.flatMap((row) => row.map((obj) => obj));
     let m=0;
-    let hr=Array.from({ length: 20 }, (_, i) => i)
+    let hr=Array.from({ length: 25 }, (_, i) => i)
     const mazeElements=newMaze.map((tile)=>{
         // console.log(tile)
         let classes=[]
@@ -21,7 +21,7 @@ function App() {
                 classes.push(key)
             }
         })
-        if(m==189){
+        if(m==312){
             classes.push("center")
         }
         m++

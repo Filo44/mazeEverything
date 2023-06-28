@@ -1,6 +1,8 @@
 import util from "util"
 import { grid } from "./grid.mjs"
-function main(grid) {
+export function DFSMain(grid, n, m) {
+    let midM = (m - 1) / 2
+    let midN = (n - 1) / 2
     var visitedArray = []
     var secondRoute = []
     var finished = false
@@ -9,7 +11,7 @@ function main(grid) {
         visitedArray.push([i, j])
         grid[i][j].visited = true
         let tile = grid[i][j]
-        if (i == 9 && j == 9) {
+        if (i == midM && j == midN) {
             finished = true
             console.log("Length:", visitedArray.length)
             secondRoute.push([i, j])
@@ -55,4 +57,4 @@ function main(grid) {
     console.log(output)
     return [visitedArray.length, secondRoute.length]
 }
-console.log(main(grid))
+console.log(DFSMain(grid, 25, 25))
