@@ -9,10 +9,18 @@ let times = 10
 let sizes = [15, 20, 25, 30]
 let results = [["DFS 1", "DFS 2", "DFSE 1", "DFSE 2", "LH 1", "LH 2"]]
 
+function roundToSigFig(number, sigFig) {
+    if (number === 0) {
+        return 0;
+    }
+
+    const multiplier = Math.pow(10, sigFig - Math.floor(Math.log10(Math.abs(number))) - 1);
+    return Math.round(number * multiplier) / multiplier;
+}
 console.log("alsdfjla;sdfj;alskdjfl;aksdjf;laskdfjl")
 //*Add a for each loop for the sizes and embed the next code into that
-let m = 25
-let n = 25
+let m = 15
+let n = 15
 for (let i = 0; i < times; i++) {
     let grid;
     while (true) {
@@ -39,6 +47,6 @@ for (let i = 0; i < times; i++) {
     console.log("DFSRes", DFSRes)
     let LeftHuggerRes = LeftHuggerMain(gridCopy3, n, m)
     console.log("LeftHuggerRes", LeftHuggerRes)
-    results.push([DFSRes[0], DFSRes[1], DFSERes[0], DFSERes[1], LeftHuggerRes[0], LeftHuggerRes[1]])
+    results.push([DFSERes[1] / DFSRes[0], DFSERes[1] / DFSRes[1], DFSERes[1] / DFSERes[0], DFSERes[1] / DFSERes[1], DFSERes[1] / LeftHuggerRes[0], DFSERes[1] / LeftHuggerRes[1]])
 }
 console.log(results)
