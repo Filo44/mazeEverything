@@ -13,7 +13,7 @@ export function DFSMain(grid, n, m) {
         let tile = grid[i][j]
         if (i == midM && j == midN) {
             finished = true
-            console.log("Length:", visitedArray.length)
+            // console.log("Length:", visitedArray.length)
             secondRoute.push([i, j])
             return
         }
@@ -55,7 +55,7 @@ export function DFSMain(grid, n, m) {
     DFS(0, 0, null, null, grid)
     // let output = util.inspect(JSON.stringify(secondRoute), { maxStringLength: Infinity });
     // console.log(output)
-    console.log(secondRoute)
+    // console.log(secondRoute)
     return [visitedArray.length, secondRoute.length]
 }
 // console.log(DFSMain(grid, 25, 25))

@@ -3,7 +3,7 @@
 export function DFSEMain(grid, n, m) {
     let midM = Math.floor((m - 1) / 2)
     let midN = midM
-    console.log(midN)
+    // console.log(midN)
     var visitedArray = []
     var secondRoutes = []
     var currentRoute = []
@@ -16,7 +16,7 @@ export function DFSEMain(grid, n, m) {
         let tile = grid[i][j]
         if (i == midN && j == midM) {
             // finished = true
-            console.log("Length:", visitedArray.length)
+            // console.log("Length:", visitedArray.length)
             secondRoutes.push([...currentRoute])
         }
         // console.log(tile)
@@ -56,7 +56,7 @@ export function DFSEMain(grid, n, m) {
     DFS(0, 0, null, null, grid)
     // let output = util.inspect(JSON.stringify(visitedArray), { maxStringLength: Infinity });
     // console.log(output)
-    console.log(secondRoutes.sort((a, b) => a.length - b.length)[0])
+    // console.log(secondRoutes.sort((a, b) => a.length - b.length)[0])
     return [visitedArray.length, secondRoutes.sort((a, b) => a.length - b.length)[0].length]
 }
 // console.log(DFSEMain(grid, 25, 25))

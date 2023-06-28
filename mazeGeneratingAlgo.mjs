@@ -50,7 +50,7 @@ export function mazeGeneratingMain(m, n) {
             phase++
         } else {
             if (nonZeroCoords(grid).length == 0) {
-                console.log(output);
+                // console.log(output);
                 break
             } else {
                 let nonZeroCoordsA = nonZeroCoords(grid)
@@ -207,8 +207,8 @@ export function mazeGeneratingMain(m, n) {
             wallAdjCell.complete = grid[currentI][currentJ - 1]
             wallAdjCell.direction = "right"
         } else {
-            console.log(wallChoice)
-            console.log("WTH")
+            // console.log(wallChoice)
+            // console.log("WTH")
         }
         let smallNum = Math.min(cellCopy.num, wallAdjCell.complete.num)
         let bigNum = Math.max(cellCopy.num, wallAdjCell.complete.num)
@@ -252,8 +252,8 @@ export function mazeGeneratingMain(m, n) {
             wallAdjCell.complete = grid[currentI][currentJ - 1]
             wallAdjCell.direction = "right"
         } else {
-            console.log(wallChoice)
-            console.log("WTH")
+            // console.log(wallChoice)
+            // console.log("WTH")
         }
         let smallNum = Math.min(cellCopy.num, wallAdjCell.complete.num)
         let bigNum = Math.max(cellCopy.num, wallAdjCell.complete.num)

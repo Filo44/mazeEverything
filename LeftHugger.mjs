@@ -38,7 +38,7 @@ export function LeftHuggerMain(grid, n, m) {
         let tile = grid[i][j]
         if (i == midM && j == midN) {
             finished = true
-            console.log("Length:", visitedArray.length)
+            // console.log("Length:", visitedArray.length)
             return
         }
         for (let it = 0; it < 4; it++) {
@@ -59,7 +59,7 @@ export function LeftHuggerMain(grid, n, m) {
                 try {
                     Hug(i + data.addI, j + data.addJ, i, j, grid)
                 } catch (error) {
-                    console.log("Stack overflow error occurred:", error);
+                    // console.log("Stack overflow error occurred:", error);
                 }
 
                 break
@@ -71,7 +71,7 @@ export function LeftHuggerMain(grid, n, m) {
     // console.log(output)
     // let output2 = util.inspect(JSON.stringify(removeCoordinates(visitedArray)), { maxStringLength: Infinity });
     // console.log(output2)
-    console.log(visitedArray.length, removeCoordinates(visitedArray).length)
+    // console.log(visitedArray.length, removeCoordinates(visitedArray).length)
     return [visitedArray.length, removeCoordinates(visitedArray).length]
 }
 // LeftHuggerMain(grid, 25, 25)
