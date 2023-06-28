@@ -27,15 +27,17 @@ for (let i = 0; i < times; i++) {
             break
         }
     }
-
-    let output = util.inspect(JSON.stringify(grid), { maxStringLength: Infinity });
-    console.log("grid:", output)
+    let gridCopy1 = structuredClone(grid)
+    let gridCopy2 = structuredClone(grid)
+    let gridCopy3 = structuredClone(grid)
+    // let output = util.inspect(JSON.stringify(grid), { maxStringLength: Infinity });
+    // console.log("grid:", output)
     // console.log(grid)
-    let DFSERes = DFSEMain(grid, n, m)
+    let DFSERes = DFSEMain(gridCopy1, n, m)
     console.log("DFSERes", DFSERes)
-    let DFSRes = DFSMain(grid, n, m)
+    let DFSRes = DFSMain(gridCopy2, n, m)
     console.log("DFSRes", DFSRes)
-    let LeftHuggerRes = LeftHuggerMain(grid, n, m)
+    let LeftHuggerRes = LeftHuggerMain(gridCopy3, n, m)
     console.log("LeftHuggerRes", LeftHuggerRes)
     results.push([DFSRes[0], DFSRes[1], DFSERes[0], DFSERes[1], LeftHuggerRes[0], LeftHuggerRes[1]])
 }
