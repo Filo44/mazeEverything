@@ -1,5 +1,5 @@
 // import util from "util"
-// import { grid } from "./grid.mjs"
+import { grid } from "./grid.mjs"
 export function DFSMain(grid, n, m) {
     let midM = Math.floor((m - 1) / 2)
     let midN = midM
@@ -58,4 +58,4 @@ export function DFSMain(grid, n, m) {
     // console.log(secondRoute)
     return [visitedArray.length, secondRoute.length]
 }
-// console.log(DFSMain(grid, 25, 25))
+console.log(DFSMain(grid, 25, 25))

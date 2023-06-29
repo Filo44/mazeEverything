@@ -1,6 +1,6 @@
-import util from "util"
+// import util from "util"
 import { grid } from "./grid.mjs"
-export function DFSMain(grid, n, m) {
+export function FloodFillMain(grid, n, m) {
     let midM = Math.floor((m - 1) / 2)
     let midN = midM
     var visitedArray = []
@@ -15,9 +15,9 @@ export function DFSMain(grid, n, m) {
         let wallDir = []
         Object.keys(cell).forEach((key) => {
             if (key != "num" && key != "v" && cell[key] == false) {
-                console.log(key)
-                console.log(`i:${i},j:${j}`)
-                console.log(grid.length)
+                // console.log(key)
+                // console.log(`i:${i},j:${j}`)
+                // console.log(grid.length)
                 wallDir.push(key)
                 let cond1 = false
                 switch (key) {
@@ -59,9 +59,15 @@ export function DFSMain(grid, n, m) {
         visitedArray.push([i, j])
         grid[i][j].visited = true
         let tile = grid[i][j]
+        // console.log("i", i)
+        // console.log("j", j)
         if (i == midM && j == midN) {
             finished = true
             // console.log("Length:", visitedArray.length)
+            secondRoute.push([i, j])
+            return
+        }
+        if (finished) {
             secondRoute.push([i, j])
             return
         }
@@ -76,16 +82,13 @@ export function DFSMain(grid, n, m) {
         })
         plausibleTiles.forEach((coordinates) => {
             DFS(coordinates[0], coordinates[1], i, j, grid)
+            visitedArray.push([i, j])
         })
-
-        if (finished) {
-            secondRoute.push([i, j])
-        }
     }
     DFS(0, 0, null, null, grid)
-    let output = util.inspect(JSON.stringify(visitedArray), { maxStringLength: Infinity });
-    console.log(output)
+    // let output = util.inspect(JSON.stringify(visitedArray), { maxStringLength: Infinity });
+    // console.log(output)
     // console.log(secondRoute)
     return [visitedArray.length, secondRoute.length]
 }
-console.log(DFSMain(grid, 25, 25))
+// console.log(FloodFillMain(grid, 25, 25))

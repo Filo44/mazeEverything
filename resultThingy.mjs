@@ -4,6 +4,7 @@ import { DFSMain } from "./DepthFirstSearch.mjs"
 import { LeftHuggerMain } from "./LeftHugger.mjs"
 import { mazeGeneratingMain } from "./mazeGeneratingAlgo.mjs"
 import { RandomMain } from "./random.mjs"
+import { FloodFillMain } from "./floodFill.mjs"
 import util from "util"
 
 let times = 10
@@ -23,7 +24,7 @@ console.log("alsdfjla;sdfj;alskdjfl;aksdjf;laskdfjl")
 // let m = 15
 // let n = 15
 sizes.forEach((size) => {
-    let results = [["DFS 1", "DFS 2", "DFSE 1", "DFSE 2", "LH 1", "LH 2", "R"]]
+    let results = [["DFS 1", "DFS 2", "DFSE 1", "DFSE 2", "LH 1", "LH 2", "FF 1", "FF 2"]]
     let m = size
     let n = size
     let i = undefined;
@@ -45,6 +46,7 @@ sizes.forEach((size) => {
         let gridCopy2 = structuredClone(grid)
         let gridCopy3 = structuredClone(grid)
         let gridCopy4 = structuredClone(grid)
+        let gridCopy5 = structuredClone(grid)
         // let output = util.inspect(JSON.stringify(grid), { maxStringLength: Infinity });
         // console.log("grid:", output)
         // console.log(grid)
@@ -55,8 +57,11 @@ sizes.forEach((size) => {
         let LeftHuggerRes = LeftHuggerMain(gridCopy3, n, m)
         // console.log("LeftHuggerRes", LeftHuggerRes)
         let RandomRes = RandomMain(gridCopy4, n, m)
-        console.log("RandomRes", RandomRes)
-        results.push([roundToSigFig(DFSERes[1] / DFSRes[0], 5) * 100, roundToSigFig(DFSERes[1] / DFSRes[1], 5) * 100, roundToSigFig(DFSERes[1] / DFSERes[0], 5) * 100, roundToSigFig(DFSERes[1] / DFSERes[1], 5) * 100, roundToSigFig(DFSERes[1] / LeftHuggerRes[0], 5) * 100, roundToSigFig(DFSERes[1] / LeftHuggerRes[1], 5) * 100, roundToSigFig(DFSERes[1] / RandomRes[0], 5) * 100])
+        let FloodFill = RandomMain(gridCopy5, n, m)
+        console.log(FloodFill)
+
+        results.push([roundToSigFig(DFSERes[1] / DFSRes[0], 5) * 100, roundToSigFig(DFSERes[1] / DFSRes[1], 5) * 100, roundToSigFig(DFSERes[1] / DFSERes[0], 5) * 100, roundToSigFig(DFSERes[1] / DFSERes[1], 5) * 100, roundToSigFig(DFSERes[1] / LeftHuggerRes[0], 5) * 100, roundToSigFig(DFSERes[1] / LeftHuggerRes[1], 5) * 100, roundToSigFig(DFSERes[1] / FloodFill[0], 5) * 100])
     }
-    console.log(results)
+    let output = util.inspect(JSON.stringify(results), { maxStringLength: Infinity });
+    console.log(output)
 })
