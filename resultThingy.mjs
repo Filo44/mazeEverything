@@ -3,6 +3,7 @@ import { DFSEMain } from "./DepthFirstSearchGoEverywere.mjs"
 import { DFSMain } from "./DepthFirstSearch.mjs"
 import { LeftHuggerMain } from "./LeftHugger.mjs"
 import { mazeGeneratingMain } from "./mazeGeneratingAlgo.mjs"
+import { RandomMain } from "./random.mjs"
 import util from "util"
 
 let times = 10
@@ -22,7 +23,7 @@ console.log("alsdfjla;sdfj;alskdjfl;aksdjf;laskdfjl")
 // let m = 15
 // let n = 15
 sizes.forEach((size) => {
-    let results = [["DFS 1", "DFS 2", "DFSE 1", "DFSE 2", "LH 1", "LH 2"]]
+    let results = [["DFS 1", "DFS 2", "DFSE 1", "DFSE 2", "LH 1", "LH 2", "R"]]
     let m = size
     let n = size
     let i = undefined;
@@ -43,6 +44,7 @@ sizes.forEach((size) => {
         let gridCopy1 = structuredClone(grid)
         let gridCopy2 = structuredClone(grid)
         let gridCopy3 = structuredClone(grid)
+        let gridCopy4 = structuredClone(grid)
         // let output = util.inspect(JSON.stringify(grid), { maxStringLength: Infinity });
         // console.log("grid:", output)
         // console.log(grid)
@@ -52,7 +54,9 @@ sizes.forEach((size) => {
         // console.log("DFSRes", DFSRes)
         let LeftHuggerRes = LeftHuggerMain(gridCopy3, n, m)
         // console.log("LeftHuggerRes", LeftHuggerRes)
-        results.push([roundToSigFig(DFSERes[1] / DFSRes[0], 5) * 100, roundToSigFig(DFSERes[1] / DFSRes[1], 5) * 100, roundToSigFig(DFSERes[1] / DFSERes[0], 5) * 100, roundToSigFig(DFSERes[1] / DFSERes[1], 5) * 100, roundToSigFig(DFSERes[1] / LeftHuggerRes[0], 5) * 100, roundToSigFig(DFSERes[1] / LeftHuggerRes[1], 5) * 100])
+        let RandomRes = RandomMain(gridCopy4, n, m)
+        console.log("RandomRes", RandomRes)
+        results.push([roundToSigFig(DFSERes[1] / DFSRes[0], 5) * 100, roundToSigFig(DFSERes[1] / DFSRes[1], 5) * 100, roundToSigFig(DFSERes[1] / DFSERes[0], 5) * 100, roundToSigFig(DFSERes[1] / DFSERes[1], 5) * 100, roundToSigFig(DFSERes[1] / LeftHuggerRes[0], 5) * 100, roundToSigFig(DFSERes[1] / LeftHuggerRes[1], 5) * 100, roundToSigFig(DFSERes[1] / RandomRes[0], 5) * 100])
     }
     console.log(results)
 })
